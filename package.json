@@ -1,8 +1,5 @@
 {
-  "name": "baihu-belmo",
+  "name": "baihu-belmo-go",
   "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "start": "sh start.sh"
-  }
+  "private": true
 }
