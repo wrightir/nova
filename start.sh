@@ -3,7 +3,7 @@
 set -e
 
 echo "========================================"
-echo "=== Baihu startup ==="
+echo "=== Baihu Go Runtime startup ==="
 echo "========================================"
 
 echo "PORT=$PORT"
@@ -38,26 +38,4 @@ export BH_SERVER_PORT="$PORT"
 echo "Baihu binary: $BAIHU_BIN"
 echo "Starting Baihu on port: $BH_SERVER_PORT"
 
-"$BAIHU_BIN" server &
-BAIHU_PID=$!
-
-echo "Baihu PID: $BAIHU_PID"
-
-i=1
-
-while [ "$i" -le 20 ]; do
-  if wget -q -O /dev/null "http://127.0.0.1:$PORT/"; then
-    echo "LOCAL HTTP CHECK: OK"
-    break
-  fi
-
-  echo "LOCAL HTTP CHECK: waiting ($i/20)"
-  sleep 0.5
-  i=$((i + 1))
-done
-
-if [ "$i" -gt 20 ]; then
-  echo "LOCAL HTTP CHECK: FAILED"
-fi
-
-wait "$BAIHU_PID"
+exec "$BAIHU_BIN" server
